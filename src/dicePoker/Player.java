@@ -80,11 +80,12 @@ public class Player {
 		}
     }
     
- // Method to display message to the user. This message is passed a string to allow multiple messages to use this method
+    // Method to display message to the user. This message is passed a string to allow multiple messages to use this method
     public void DisplayMessage(String output) {
 		JOptionPane.showMessageDialog(null, output, "", JOptionPane.INFORMATION_MESSAGE);
 	}
     
+    // Method to determine if the player wants to play again or not
     public Boolean PlayAgain() {
     	int result = JOptionPane.showConfirmDialog(null, "Do you wish to play again?", "Confirmation", JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.NO_OPTION) {
