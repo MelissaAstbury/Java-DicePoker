@@ -1,10 +1,15 @@
 package dicePoker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class DicePoker {
 
@@ -14,6 +19,7 @@ public class DicePoker {
 		int betAmount = 0;
 		int playedBets = 0;
 		Computer computer = new Computer();
+		Map<String, Integer> leaderBoardScores = new HashMap<>();
 		boolean playAgain = true;
 		
 		// Play the game until the player specifies not to play anymore
@@ -53,6 +59,22 @@ public class DicePoker {
 			JOptionPane.showMessageDialog(null, new JScrollPane(table));
 			
 			// HIGHSCORE TABLE REQUIRED
+			// put values into HashMap
+			leaderBoardScores.put(playerName, player.bankBalance);
+			
+			// Create table for display
+			DefaultTableModel model = new DefaultTableModel(); 
+			model.addColumn("Name"); 
+			model.addColumn("High Score - Balance (£)"); 
+			JTable table2 = new JTable(model);
+			
+			// Loop through HashMap and add to table for display
+			for (Map.Entry<String, Integer> score : leaderBoardScores.entrySet()) {
+					model.addRow(new Object[] {score.getKey(), score.getValue()});
+		    }
+			
+			// Display the table
+			JOptionPane.showMessageDialog(null, new JScrollPane(table2));
 			
 			// Once all rounds are complete and the winner is revealed ask player if they wish to play again
 			playAgain = player.PlayAgain();
