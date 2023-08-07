@@ -45,6 +45,7 @@ public class Player {
     public int placeBet() {
     	String output = "";
     	String betRequested = JOptionPane.showInputDialog("How much do you wish to bet? \n It's £1 per bet and you can bet up to £4");
+    	CancelGame(betRequested);
 		int betRequestedToInt = Integer.parseInt(betRequested);
 		if (betRequestedToInt >= 1 && betRequestedToInt <= 4) {
 			bettingTotal = bettingTotal + betRequestedToInt;
@@ -93,5 +94,12 @@ public class Player {
 		} else {
 			return true;
 		}
+    }
+    
+    public void CancelGame(String cancelInput) {
+    	if (cancelInput == null) {
+			System.out.println("Game cancelled");
+			System.exit(0);
+		} 
     }
 }

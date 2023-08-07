@@ -23,6 +23,7 @@ public class DicePoker {
 		// Player input required to specify their name. This value is then used to create a new Player instance
 		String playerName = JOptionPane.showInputDialog("Welcome to Dice Poker! \n Please enter your name");
 		Player player = new Player(playerName, 6);
+		player.CancelGame(playerName);
 		
 		// Display to the player their starting balance for the game
 		output = player.GetName() + ", your starting balance for this game is £" + player.bankBalance;
