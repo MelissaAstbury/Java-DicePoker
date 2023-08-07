@@ -1,15 +1,11 @@
 package dicePoker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class DicePoker {
 
@@ -58,23 +54,11 @@ public class DicePoker {
 			JTable table = new JTable(rows, cols);
 			JOptionPane.showMessageDialog(null, new JScrollPane(table));
 			
-			// HIGHSCORE TABLE REQUIRED
-			// put values into HashMap
+			// Put values into map so we can retrieve this information for the score table
 			leaderBoardScores.put(playerName, player.bankBalance);
 			
-			// Create table for display
-			DefaultTableModel model = new DefaultTableModel(); 
-			model.addColumn("Name"); 
-			model.addColumn("High Score - Balance (£)"); 
-			JTable table2 = new JTable(model);
-			
-			// Loop through HashMap and add to table for display
-			for (Map.Entry<String, Integer> score : leaderBoardScores.entrySet()) {
-					model.addRow(new Object[] {score.getKey(), score.getValue()});
-		    }
-			
-			// Display the table
-			JOptionPane.showMessageDialog(null, new JScrollPane(table2));
+			// Method to get the high score table
+			computer.CreateScoresTable(leaderBoardScores);
 			
 			// Once all rounds are complete and the winner is revealed ask player if they wish to play again
 			playAgain = player.PlayAgain();
@@ -107,4 +91,4 @@ public class DicePoker {
 // | total in your bank at the end of the game | - DONE
 
 // - ADDITIONAL FEATURES
-// High score table based on balance - 
+// High score table based on balance - DONE
