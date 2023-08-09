@@ -1,14 +1,14 @@
 package dicePoker;
 
+import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 
 public class Computer {
 	
@@ -25,22 +25,22 @@ public class Computer {
 		diceTwo = ThreadLocalRandom.current().nextInt(min, max + 1);
 	}
 	
+	// Method to display high score table
 	public void CreateScoresTable(Map<String, Integer> leaderBoardScores) {
-		System.out.println(leaderBoardScores);
 		// Create table for display
 		DefaultTableModel model = new DefaultTableModel(); 
 		// Define columns
 		model.addColumn("Name"); 
 		model.addColumn("High Score - Balance (£)"); 
-		// pass the DefaultTableModel to the JTable created
+		// Pass the DefaultTableModel to the JTable created
 		JTable table2 = new JTable(model);
 
 		// Convert to a list of entries
 		List<Map.Entry<String, Integer>> sortedScores = new ArrayList<>(leaderBoardScores.entrySet());
-		// Sort by Integer
+		// Sort by Integer in descending order
 		sortedScores.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
 		
-		// Loop through HashMap and add to table for display
+		// Loop through and add to table for display
 		for (Map.Entry<String, Integer> score : sortedScores) {
 			model.addRow(new Object[] {score.getKey(), score.getValue()});
 	    }

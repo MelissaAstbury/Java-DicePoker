@@ -22,21 +22,24 @@ public class Player {
     
     // Method to assign points to the player
     public int pointsCalculator(int bankBalance, int betAmount, int diceOne, int diceTwo) {
+    	// Message to make player aware what dice numbers the computer has rolled
     	String output = "Dice 1 has rolled: " + diceOne + "\nDice 2 has rolled: " + diceTwo;
     	DisplayMessage(output);
+    	
     	int points = 0;
     	
-    	output = "You bank balance is: £";
+    	output = "Your bank balance is: £";
     	
-    	if (diceOne == diceTwo + 1 || diceOne == diceTwo - 1) {
-        	points = bankBalance = bankBalance + (betAmount * 2);
-        	DisplayMessage(output + bankBalance);
+    	// Rules put in place for players to either double, triple or lose their money
+    	if (diceOne == diceTwo + 1 || diceTwo == diceOne + 1 || diceOne == diceTwo - 1 || diceTwo == diceOne - 1) {
+        	points = bankBalance + (betAmount * 2);
+        	DisplayMessage(output + points);
         } else if (diceOne == diceTwo) {
-        	points = bankBalance = bankBalance + (betAmount * 3);
-        	DisplayMessage(output + bankBalance);
+        	points = bankBalance + (betAmount * 3);
+        	DisplayMessage(output + points);
         } else {
-        	points = bankBalance = bankBalance - betAmount;
-        	DisplayMessage(output + bankBalance);
+        	points = bankBalance - betAmount;
+        	DisplayMessage(output + points);
         }
     	return points;
     }   
@@ -44,10 +47,13 @@ public class Player {
     // Method for player to place their bet. Must be between £1 - £4 only
     public int placeBet() {
     	String output = "";
+    	
     	String betRequested = JOptionPane.showInputDialog("How much do you wish to bet? \n It's £1 per bet and you can bet up to £4");
     	CancelGame(betRequested);
 		int betRequestedToInt = Integer.parseInt(betRequested);
+		
 		if (betRequestedToInt >= 1 && betRequestedToInt <= 4) {
+			// bettingTotal updated which this attribute is used for the high score table
 			bettingTotal = bettingTotal + betRequestedToInt;
 			output = "You have chosen to bet £" + betRequestedToInt;
 			DisplayMessage(output);
@@ -58,18 +64,23 @@ public class Player {
     
     // Method to calculate through-out the whole game how much the player has lost or made
     public int CalculateProfitsOrLoss(int bankBalance) {
+    	// Firstly, check if the game needs to end 
     	printResult(bankBalance);
 		int profits = 0;
+		
+		// Calculate how much has been lost if the players bank balance is less than £0
 		if (bankBalance < 0) {
-			profits = 6 - bankBalance;
-		} else {
 			profits = bankBalance - 6;
+		} else {
+			// Calculate how much the player has gain. Math.abs has been used to stop negative values being calculated 
+			// E.g Cases whereby the bank balance is higher then the starting amount (6 - 9 = -3). This gets changed to 3 to show the profit and not a loss
+			profits = Math.abs(6 - bankBalance);
 		}
 		return profits;
     }
     
     // Method to display end game message
-    public void printResult(int bankBalance) {
+    private void printResult(int bankBalance) {
     	String output = "";
     	
     	if (bankBalance > 0) {
@@ -96,6 +107,7 @@ public class Player {
 		}
     }
     
+    // Method to catch the instances a player cancels on an input
     public void CancelGame(String cancelInput) {
     	if (cancelInput == null) {
 			System.out.println("Game cancelled");
