@@ -1,13 +1,14 @@
 package dicePoker;
 
-import java.util.concurrent.ThreadLocalRandom;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Computer {
@@ -28,10 +29,10 @@ public class Computer {
 	// Method to display high score table
 	public void CreateScoresTable(Map<String, Integer> leaderBoardScores) {
 		// Create table for display
-		DefaultTableModel model = new DefaultTableModel(); 
+		DefaultTableModel model = new DefaultTableModel();
 		// Define columns
-		model.addColumn("Name"); 
-		model.addColumn("High Score - Balance (£)"); 
+		model.addColumn("Name");
+		model.addColumn("High Score - Balance (£)");
 		// Pass the DefaultTableModel to the JTable created
 		JTable table2 = new JTable(model);
 

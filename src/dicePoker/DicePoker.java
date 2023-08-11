@@ -1,10 +1,11 @@
 package dicePoker;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DicePoker {
 
@@ -49,7 +50,7 @@ public class DicePoker {
 				// Call method to generate two random dice numbers
 				computer.RollTheDice();
 
-				// Call method to calculate the players balance after the bet has been played so the player knows how much is left 
+				// Call method to calculate the players balance after the bet has been played so the player knows how much is left
 				player.bankBalance = player.pointsCalculator(player.bankBalance, betAmount, computer.diceOne, computer.diceTwo);
 
 				// To be able to place another bet the betAmount needs to be reset to £0 and we need to increase the count for the bets played (restriction of 5 bets per game)
@@ -60,7 +61,7 @@ public class DicePoker {
 			// Method called once all bets have been played or there is no money left, to display the profit or loss
 			int profits = player.CalculateProfitsOrLoss(player.bankBalance);
 
-			// Display a table back to the user to show a breakdown of their game statistics 
+			// Display a table back to the user to show a breakdown of their game statistics
 			// 2 dimensional for 'rows' so more than one row of data can be inserted
 			Object[][] rows = {{player.name, player.bettingTotal,playedBets, profits, player.bankBalance}};
 			Object[] cols = {"Name", "Betting Total (£)","Rounds","Profits (£)", "Balance (£)"};

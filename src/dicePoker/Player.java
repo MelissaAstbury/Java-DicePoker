@@ -4,12 +4,12 @@ import javax.swing.JOptionPane;
 
 public class Player {
 
-	// Initialise variables 
+	// Initialise variables
 	public String name;
 	public int bankBalance;
 	public int bettingTotal;
 
-	// Constructor 
+	// Constructor
 	public Player(String name, int bankBalance) {
 		this.name = name;
 		this.bankBalance = bankBalance;
@@ -37,7 +37,7 @@ public class Player {
 			DisplayMessage(output + points);
 		}
 		return points;
-	}   
+	}
 
 	// Method for player to place their bet. Must be between £1 - £4 only
 	public int placeBet() {
@@ -63,7 +63,7 @@ public class Player {
 
 	// Method to calculate through-out the whole game how much the player has lost or made
 	public int CalculateProfitsOrLoss(int bankBalance) {
-		// Firstly, check if the game needs to end 
+		// Firstly, check if the game needs to end
 		printResult(bankBalance);
 		int profits = 0;
 
@@ -108,6 +108,6 @@ public class Player {
 		if (cancelInput == null) {
 			System.out.println("Game cancelled");
 			System.exit(0);
-		} 
+		}
 	}
 }
