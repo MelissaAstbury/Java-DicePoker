@@ -27,7 +27,7 @@ public class DicePoker {
 			// Player input required to specify their name. This value is then used to create a new Player instance
 			playerName = JOptionPane.showInputDialog("Welcome to Dice Poker! \n Please enter your name");
 			// Added restriction to not allow names that are less than 3 characters
-			if(playerName.length() > 2) {
+			if(playerName != null && playerName.length() > 2) {
 				playerName = playerName.substring(0, 1).toUpperCase() + playerName.substring(1).toLowerCase();
 			} else {
 				JOptionPane.showMessageDialog(null, "Game cancelled due to invalid name", "", JOptionPane.INFORMATION_MESSAGE);
