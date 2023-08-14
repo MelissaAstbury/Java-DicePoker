@@ -20,6 +20,7 @@ public class DicePoker {
 		Computer computer = new Computer();
 		// Map is an interface and HashMap is the class that uses this interface. You can not use a interface directly and you must obey by the interface 'contract'
 		Map<String, Integer> leaderBoardScores = new HashMap<>();
+		String betInfo = "Per Rounds Betting Information: \n";
 
 		// Play the game (application) until the player specifies not to play anymore
 		while(playAgain) {
@@ -51,8 +52,14 @@ public class DicePoker {
 				computer.RollTheDice();
 
 				// Call method to calculate the players balance after the bet has been played so the player knows how much is left
-				player.setBankBalance(player.pointsCalculator(betAmount, computer.getDiceOne(), computer.getDiceTwo()));
+				int points = player.pointsCalculator(betAmount, computer.getDiceOne(), computer.getDiceTwo());
+				int proffitOrLoss = points - player.getBankBalance();
+				player.setBankBalance(points);
 
+				// Construct string together to display back to the user once all rounds are played
+				// This is to show the player what they bet, dice numbers and the profit or loss they made per bet
+				betInfo = betInfo + "Bet Amount: £" + betAmount + " ,Dice Numbers: [" + computer.getDiceOne() + "," + computer.getDiceTwo() + "], Profit/Loss: £"+ proffitOrLoss + "\n";
+				
 				// To be able to place another bet the betAmount needs to be reset to £0 and we need to increase the count for the bets played (restriction of 5 bets per game)
 				betAmount = 0;
 				playedBets ++;
@@ -60,7 +67,9 @@ public class DicePoker {
 
 			// Method called once all bets have been played or there is no money left, to display the profit or loss
 			int profits = player.CalculateProfitsOrLoss(player.getBankBalance());
-
+			
+			player.DisplayMessage(betInfo);
+			
 			// Display a table back to the user to show a breakdown of their game statistics
 			// 2 dimensional for 'rows' so more than one row of data can be inserted
 			Object[][] rows = {{player.getName(), player.getBettingTotal(), playedBets, profits, player.getBankBalance()}};
@@ -81,6 +90,7 @@ public class DicePoker {
 				// This is required so no other values from the previous games effect the new game
 				betAmount = 0;
 				playedBets = 0;
+				betInfo = "Per Rounds Betting Information: \n";
 			}
 		}
 	}
