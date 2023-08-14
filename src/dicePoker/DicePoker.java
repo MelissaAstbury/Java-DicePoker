@@ -35,14 +35,14 @@ public class DicePoker {
 
 			Player player = new Player(playerName, startingBankBalance);
 			// Player has the option to cancel inputting their name therefore, this method is called to exit the game if no name is given
-			player.CancelGame(player.name);
+			player.CancelGame(player.getName());
 
 			// Display to the player their starting balance for the game (currently players get £6)
-			output = player.name + ", your starting balance for this game is £" + player.bankBalance;
+			output = player.getName() + ", your starting balance for this game is £" + player.getBankBalance();
 			player.DisplayMessage(output);
 
 			// Bets can only be placed if the player has money to bet or if no more than 5 bets have already been used. Restriction for this has been put in place with the while loop
-			while(player.bankBalance > 0 && playedBets < 5) {
+			while(player.getBankBalance() > 0 && playedBets < 5) {
 				// Keep asking the player for a betting amount if the bet is not between £1 - £4
 				while (betAmount == 0) {
 					betAmount = player.placeBet();
@@ -51,7 +51,7 @@ public class DicePoker {
 				computer.RollTheDice();
 
 				// Call method to calculate the players balance after the bet has been played so the player knows how much is left
-				player.bankBalance = player.pointsCalculator(player.bankBalance, betAmount, computer.diceOne, computer.diceTwo);
+				player.setBankBalance(player.pointsCalculator(betAmount, computer.getDiceOne(), computer.getDiceTwo()));
 
 				// To be able to place another bet the betAmount needs to be reset to £0 and we need to increase the count for the bets played (restriction of 5 bets per game)
 				betAmount = 0;
@@ -59,17 +59,17 @@ public class DicePoker {
 			}
 
 			// Method called once all bets have been played or there is no money left, to display the profit or loss
-			int profits = player.CalculateProfitsOrLoss(player.bankBalance);
+			int profits = player.CalculateProfitsOrLoss(player.getBankBalance());
 
 			// Display a table back to the user to show a breakdown of their game statistics
 			// 2 dimensional for 'rows' so more than one row of data can be inserted
-			Object[][] rows = {{player.name, player.bettingTotal,playedBets, profits, player.bankBalance}};
+			Object[][] rows = {{player.getName(), player.getBettingTotal(), playedBets, profits, player.getBankBalance()}};
 			Object[] cols = {"Name", "Betting Total (£)","Rounds","Profits (£)", "Balance (£)"};
 			JTable table = new JTable(rows, cols);
 			JOptionPane.showMessageDialog(null, new JScrollPane(table));
 
 			// Push players final values into HashMap so we can retrieve this information for the score table
-			leaderBoardScores.put(player.name, player.bankBalance);
+			leaderBoardScores.put(player.getName(), player.getBankBalance());
 
 			// Method to retrieve the high score table
 			computer.CreateScoresTable(leaderBoardScores);

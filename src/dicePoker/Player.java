@@ -5,9 +5,9 @@ import javax.swing.JOptionPane;
 public class Player {
 
 	// Initialise variables
-	public String name;
-	public int bankBalance;
-	public int bettingTotal;
+	private String name;
+	private int bankBalance;
+	private int bettingTotal;
 
 	// Constructor
 	public Player(String name, int bankBalance) {
@@ -15,8 +15,29 @@ public class Player {
 		this.bankBalance = bankBalance;
 	}
 
+	// Getters and Setters
+	public String getName() {
+		return name;
+	}
+
+	public int getBankBalance() {
+		return bankBalance;
+	}
+
+	public void setBankBalance(int bankBalance) {
+		this.bankBalance = bankBalance;
+	}
+
+	public int getBettingTotal() {
+		return bettingTotal;
+	}
+
+	public void setBettingTotal(int bettingTotal) {
+		this.bettingTotal = bettingTotal;
+	}
+
 	// Method to assign points to the player
-	public int pointsCalculator(int bankBalance, int betAmount, int diceOne, int diceTwo) {
+	public int pointsCalculator(int betAmount, int diceOne, int diceTwo) {
 		// Message to make player aware what dice numbers the computer has rolled
 		String output = "Dice 1 has rolled: " + diceOne + "\nDice 2 has rolled: " + diceTwo;
 		DisplayMessage(output);
@@ -27,13 +48,13 @@ public class Player {
 
 		// Rules put in place for players to either double, triple or lose their money
 		if (diceOne == diceTwo + 1 || diceTwo == diceOne + 1 || diceOne == diceTwo - 1 || diceTwo == diceOne - 1) {
-			points = bankBalance + (betAmount * 2);
+			points = getBankBalance() + (betAmount * 2);
 			DisplayMessage(output + points);
 		} else if (diceOne == diceTwo) {
-			points = bankBalance + (betAmount * 3);
+			points = getBankBalance() + (betAmount * 3);
 			DisplayMessage(output + points);
 		} else {
-			points = bankBalance - betAmount;
+			points = getBankBalance() - betAmount;
 			DisplayMessage(output + points);
 		}
 		return points;
@@ -53,7 +74,7 @@ public class Player {
 
 		if (betRequestedToInt >= 1 && betRequestedToInt <= 4) {
 			// bettingTotal updated which this attribute is used for the high score table
-			bettingTotal = bettingTotal + betRequestedToInt;
+			setBettingTotal(bettingTotal + betRequestedToInt);
 			output = "You have chosen to bet £" + betRequestedToInt;
 			DisplayMessage(output);
 			return betRequestedToInt;

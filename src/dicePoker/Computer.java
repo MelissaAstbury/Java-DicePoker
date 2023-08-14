@@ -14,16 +14,33 @@ import javax.swing.table.DefaultTableModel;
 public class Computer {
 
 	// Initialise variables
-	public int diceOne;
-	public int diceTwo;
+	private int diceOne;
+	private int diceTwo;
+	
+	// Getters and Setters
+	public int getDiceOne() {
+		return diceOne;
+	}
+
+	public void setDiceOne(int diceOne) {
+		this.diceOne = diceOne;
+	}
+
+	public int getDiceTwo() {
+		return diceTwo;
+	}
+
+	public void setDiceTwo(int diceTwo) {
+		this.diceTwo = diceTwo;
+	}
 
 	// Method for the computer to randomly 'roll' two dice so two numbers can be generated for that round
 	public void RollTheDice(){
 		int min = 1;
 		int max = 6;
 
-		diceOne = ThreadLocalRandom.current().nextInt(min, max + 1);
-		diceTwo = ThreadLocalRandom.current().nextInt(min, max + 1);
+		setDiceOne(ThreadLocalRandom.current().nextInt(min, max + 1));
+		setDiceTwo(ThreadLocalRandom.current().nextInt(min, max + 1));
 	}
 
 	// Method to display high score table
